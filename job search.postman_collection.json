@@ -1,0 +1,1549 @@
+{
+	"info": {
+		"_postman_id": "21851c25-ca9a-44a6-92a1-a453e0fbb9bd",
+		"name": "job search",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "38001870"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "sign up",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"firstName\": \"John\",\r\n  \"lastName\": \"Doe\",\r\n  \"email\": \"ahmedhassan20218@gmail.com\",\r\n  \"password\": \"securePass123\",\r\n  \"mobileNumber\": \"+1234567890\",\r\n  \"provider\": \"system\",\r\n  \"DOB\": \"2000-05-15\",\r\n  \"gender\": \"Male\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/auth/signup",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "confirm otp",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var response = pm.response.json();\r",
+									"pm.environment.set(\"access_token\", response.accessToken);\r",
+									"pm.environment.set(\"refresh_token\", response.refreshToken);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"ahmedhassan200218@gmail.com\",\r\n  \"otp\": \"15165\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/auth/confirm-otp",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"confirm-otp"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "sign in",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var response = pm.response.json();\r",
+									"pm.environment.set(\"access_token\", response.accessToken);\r",
+									"pm.environment.set(\"refresh_token\", response.refreshToken);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"ahmedhassan20218@gmail.com\",\r\n  \"password\": \"securePass123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/auth/signin",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"signin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "sign up-google",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var response = pm.response.json();\r",
+									"pm.environment.set(\"access_token\", response.accessToken)"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"token\": \"eyJhbGciOiJSUzI1NiIsImtpZCI6IjI1ZjgyMTE3MTM3ODhiNjE0NTQ3NGI1MDI5YjAxNDFiZDViM2RlOWMiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJhenAiOiIyMDYyNTgyODAzMzktZTc1Y2V2dGJzNXRvZGZya3BzcWlwdXJwajI0NzFwaDEuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJhdWQiOiIyMDYyNTgyODAzMzktZTc1Y2V2dGJzNXRvZGZya3BzcWlwdXJwajI0NzFwaDEuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJzdWIiOiIxMDY4NDI1NDgxNjE5NzU2ODAzNDciLCJlbWFpbCI6ImFobWVkaGFzc2FuMjAwMjE4QGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJhdF9oYXNoIjoiRC1oSGVoRkFpWUI4NnZqRjU3T2xQUSIsIm5hbWUiOiJBaG1lZCBIYXNzYW4iLCJwaWN0dXJlIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS2FJbkFveWt3bndtYmpvVE5DT1kwNUJIQkZ4VGNnTnlhcnhydkhIWG52NVNxREdFXzg9czk2LWMiLCJnaXZlbl9uYW1lIjoiQWhtZWQiLCJmYW1pbHlfbmFtZSI6Ikhhc3NhbiIsImlhdCI6MTc0MTA5MzU0NywiZXhwIjoxNzQxMDk3MTQ3fQ.NK-SbFZqsl_Qg2CCebnAQ3pp0eJiGMSNwd6cuA8YoBQktQzXkzLYF8q2FfkHSl64IXaTLVVQvh1plfgG1HqMipVXhXt1cMVUTEK8BMFp0omPBdF6lnf-crgiWn0HS7PHxQMrM71u3wRWAbtlZBzf7ImSF1Uk27GP6lIeuIwI9Honm22aqjvvLHBmLehLjOnvEMq5V8B-ceuRATh4lmTA4OH8NkJWPsxLF5jTqLXAycEtKCc7EXJ1yK3NNf-AAyn9hZ7tBavZt34DFOq7YQwd1WipaonjyPaaf9mWIPejcu0WxXE2fIcW4XrPHevQfOKEnbKwvQlNHCrpEJxceiJ-Gg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/auth/signup/google",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"signup",
+								"google"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "sign in-google",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var response = pm.response.json();\r",
+									"pm.environment.set(\"access_token\", response.accesstoken);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"token\": \"eyJhbGciOiJSUzI1NiIsImtpZCI6IjI1ZjgyMTE3MTM3ODhiNjE0NTQ3NGI1MDI5YjAxNDFiZDViM2RlOWMiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJhenAiOiIyMDYyNTgyODAzMzktZTc1Y2V2dGJzNXRvZGZya3BzcWlwdXJwajI0NzFwaDEuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJhdWQiOiIyMDYyNTgyODAzMzktZTc1Y2V2dGJzNXRvZGZya3BzcWlwdXJwajI0NzFwaDEuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJzdWIiOiIxMDY4NDI1NDgxNjE5NzU2ODAzNDciLCJlbWFpbCI6ImFobWVkaGFzc2FuMjAwMjE4QGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJhdF9oYXNoIjoiRC1oSGVoRkFpWUI4NnZqRjU3T2xQUSIsIm5hbWUiOiJBaG1lZCBIYXNzYW4iLCJwaWN0dXJlIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS2FJbkFveWt3bndtYmpvVE5DT1kwNUJIQkZ4VGNnTnlhcnhydkhIWG52NVNxREdFXzg9czk2LWMiLCJnaXZlbl9uYW1lIjoiQWhtZWQiLCJmYW1pbHlfbmFtZSI6Ikhhc3NhbiIsImlhdCI6MTc0MTA5MzU0NywiZXhwIjoxNzQxMDk3MTQ3fQ.NK-SbFZqsl_Qg2CCebnAQ3pp0eJiGMSNwd6cuA8YoBQktQzXkzLYF8q2FfkHSl64IXaTLVVQvh1plfgG1HqMipVXhXt1cMVUTEK8BMFp0omPBdF6lnf-crgiWn0HS7PHxQMrM71u3wRWAbtlZBzf7ImSF1Uk27GP6lIeuIwI9Honm22aqjvvLHBmLehLjOnvEMq5V8B-ceuRATh4lmTA4OH8NkJWPsxLF5jTqLXAycEtKCc7EXJ1yK3NNf-AAyn9hZ7tBavZt34DFOq7YQwd1WipaonjyPaaf9mWIPejcu0WxXE2fIcW4XrPHevQfOKEnbKwvQlNHCrpEJxceiJ-Gg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/auth/signin/google",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"signin",
+								"google"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Send OTP for Password Reset",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"ahmedhassan200218@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/auth/send-otp",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"send-otp"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reset Password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"ahmedhassan200218@gmail.com\",\r\n  \"otp\": \"97427\",\r\n  \"newPassword\": \"newSeurePass123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/auth/reset-password",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"reset-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "refresh token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var response = pm.response.json();\r",
+									"pm.environment.set(\"access_token\", response.accessToken)"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"refreshToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3YzU0YmJmZjU0OWY4YjEwMGYyODY5NyIsImlhdCI6MTc0MDk4MzI1MywiZXhwIjoxNzQxNTg4MDUzfQ.TbrcBvAvuZqhsRsj6qcw_e2GLGcrweUpJEMZYNkxFBI\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/auth/refresh-token",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"refresh-token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CRON",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"refreshToken\": \"your_refresh_token\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/auth/cron/delete-expired-otps",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"cron",
+								"delete-expired-otps"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "update user",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"firstName\": \"John\",\r\n  \"lastName\": \"Doe\",\r\n  \"gender\": \"Male\",\r\n  \"DOB\": \"1995-08-15\",\r\n  \"mobileNumber\": \"0123456789\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/user/update",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update password",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"oldPassword\": \"newSeurePass123\",\r\n  \"newPassword\": \"newSeurePass1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/user/update-password",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"update-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get loged in user",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/user/profile",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get another user profile",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/user/67c54bbff549f8b100f28697",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"67c54bbff549f8b100f28697"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Upload Profile Picture",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/ahmed/Pictures/background pictures/backiee-72229.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/user//upload-profile-pic",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"",
+								"upload-profile-pic"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Upload cover Picture",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/ahmed/Pictures/background pictures/backiee-72229.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/user//upload-cover-pic",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"",
+								"upload-cover-pic"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Profile Picture",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/user/delete-profile-pic",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"delete-profile-pic"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete cover Picture",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/user/delete-cover-pic",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"delete-cover-pic"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete user",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/user/soft-delete",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"soft-delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "company",
+			"item": [
+				{
+					"name": "add company",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "companyName",
+									"value": "Tech Solutions",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "We provide AI-powered solutions",
+									"type": "text"
+								},
+								{
+									"key": "industry",
+									"value": "Technology",
+									"type": "text"
+								},
+								{
+									"key": "address",
+									"value": "123 Main Street, NY",
+									"type": "text"
+								},
+								{
+									"key": "numberOfEmployees",
+									"value": "11-20",
+									"type": "text"
+								},
+								{
+									"key": "companyEmail",
+									"value": "info@techsolutions.com",
+									"type": "text"
+								},
+								{
+									"key": "logo",
+									"type": "file",
+									"src": "/C:/Users/ahmed/Pictures/background pictures/backiee-72229.jpg"
+								},
+								{
+									"key": "coverPic",
+									"type": "file",
+									"src": "/C:/Users/ahmed/Pictures/background pictures/backiee-72229.jpg"
+								},
+								{
+									"key": "legalAttachment",
+									"type": "file",
+									"src": "/C:/Users/ahmed/Pictures/background pictures/backiee-123754.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/company/add",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"company",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update company",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "companyName",
+									"value": "Tech Solutions",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "We provide AI-powered solutions",
+									"type": "text"
+								},
+								{
+									"key": "industry",
+									"value": "Technology",
+									"type": "text"
+								},
+								{
+									"key": "address",
+									"value": "123 Main Street, NY",
+									"type": "text"
+								},
+								{
+									"key": "numberOfEmployees",
+									"value": "11-20",
+									"type": "text"
+								},
+								{
+									"key": "companyEmail",
+									"value": "info@techsolutions.com",
+									"type": "text"
+								},
+								{
+									"key": "logo",
+									"type": "file",
+									"src": "/C:/Users/ahmed/Pictures/background pictures/backiee-72229.jpg"
+								},
+								{
+									"key": "coverPic",
+									"type": "file",
+									"src": "/C:/Users/ahmed/Pictures/background pictures/backiee-72229.jpg"
+								},
+								{
+									"key": "legalAttachment",
+									"type": "file",
+									"src": "/C:/Users/ahmed/Pictures/background pictures/backiee-117772.jpg",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/company/update/67c839381f6c815a6395ac34",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"company",
+								"update",
+								"67c839381f6c815a6395ac34"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete company",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/company/soft-delete/67c839381f6c815a6395ac34",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"company",
+								"soft-delete",
+								"67c839381f6c815a6395ac34"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get company with job",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/company/67c839381f6c815a6395ac34",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"company",
+								"67c839381f6c815a6395ac34"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "search by name for company",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/company/search?name=Tech",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"company",
+								"search"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Tech"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update company logo",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "logo",
+									"type": "file",
+									"src": "/C:/Users/ahmed/Pictures/background pictures/backiee-72229.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/company/upload-logo/67c839381f6c815a6395ac34",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"company",
+								"upload-logo",
+								"67c839381f6c815a6395ac34"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update company cover",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "coverPic",
+									"type": "file",
+									"src": "/C:/Users/ahmed/Pictures/background pictures/backiee-72229.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/company/upload-cover/67c839381f6c815a6395ac34",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"company",
+								"upload-cover",
+								"67c839381f6c815a6395ac34"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete company logo",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/company/delete-logo/67c839381f6c815a6395ac34",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"company",
+								"delete-logo",
+								"67c839381f6c815a6395ac34"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete company cover",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/company/delete-cover/67c839381f6c815a6395ac34",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"company",
+								"delete-cover",
+								"67c839381f6c815a6395ac34"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "job",
+			"item": [
+				{
+					"name": "add job",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"companyId\": \"67c839381f6c815a6395ac34\",\r\n  \"jobTitle\": \"Senior google Developer\",\r\n  \"jobLocation\": \"remote\",\r\n  \"workingTime\": \"part-time\",\r\n  \"seniorityLevel\": \"Senior\",\r\n  \"jobDescription\": \"Build and maintain scalable backend services using Node.js.\",\r\n  \"technicalSkills\": [\"Node.js\", \"TypeScript\", \"MongoDB\"],\r\n  \"softSkills\": [\"Problem-solving\", \"Communication\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/job/add",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"job",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update job",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"companyId\": \"67c839381f6c815a6395ac34\",\r\n  \"jobTitle\": \"Senior google Develope\",\r\n  \"jobLocation\": \"remote\",\r\n  \"workingTime\": \"part-time\",\r\n  \"seniorityLevel\": \"Senior\",\r\n  \"jobDescription\": \"Build and maintain scalable backend services using Node.js.\",\r\n  \"technicalSkills\": [\"Node.js\", \"TypeScript\", \"MongoDB\"],\r\n  \"softSkills\": [\"Problem-solving\", \"Communication\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/job/update/67c9388bbdd28682a401fb62",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"job",
+								"update",
+								"67c9388bbdd28682a401fb62"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete job",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/job/delete/67c9388bbdd28682a401fb62",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"job",
+								"delete",
+								"67c9388bbdd28682a401fb62"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all jobs",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/job?page=1&limit=1&sort=createdAt",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"job"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "1"
+								},
+								{
+									"key": "sort",
+									"value": "createdAt"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Jobs for a Specific Company",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/job/67c839381f6c815a6395ac34?page=1&limit=2",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"job",
+								"67c839381f6c815a6395ac34"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Jobs by Company Name",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/job?companyName=Tech Solutions",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"job"
+							],
+							"query": [
+								{
+									"key": "companyName",
+									"value": "Tech Solutions"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Jobs with filter",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/job/filter?workingTime=part-time&jobLocation=remote&technicalSkills=MongoDB,node.js",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"job",
+								"filter"
+							],
+							"query": [
+								{
+									"key": "workingTime",
+									"value": "part-time"
+								},
+								{
+									"key": "jobLocation",
+									"value": "remote"
+								},
+								{
+									"key": "technicalSkills",
+									"value": "MongoDB,node.js"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Applications for a Job",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/job/67c93bcf9ac9cf06a58e730b/applications?page=1&limit=5&sort=createdAt",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"job",
+								"67c93bcf9ac9cf06a58e730b",
+								"applications"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "5"
+								},
+								{
+									"key": "sort",
+									"value": "createdAt"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "apply to a job",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "userCV",
+									"type": "file",
+									"src": "/C:/Users/ahmed/Desktop/Folders/college/Graduation project/CH 1 & 2.pdf"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/job/67c93bcf9ac9cf06a58e730b/apply",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"job",
+								"67c93bcf9ac9cf06a58e730b",
+								"apply"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Accept/Reject an Applicant",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"status\": \"accepted\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/job/:jobId/application/:applicationId",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"job",
+								":jobId",
+								"application",
+								":applicationId"
+							],
+							"variable": [
+								{
+									"key": "jobId",
+									"value": "67c93bcf9ac9cf06a58e730b"
+								},
+								{
+									"key": "applicationId",
+									"value": "67c94529e1ee5a39e5dd08c4"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "admin",
+			"item": [
+				{
+					"name": "Admin Dashboard",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"query\": \"query { allUsersAndCompanies { users { _id firstName lastName email role bannedAt } companies { _id companyName industry companyEmail bannedAt approvedByAdmin } } }\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/graphql",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ban/unban user",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"query\": \"query { allUsersAndCompanies { users { _id firstName lastName email role bannedAt } companies { _id companyName industry companyEmail bannedAt approvedByAdmin } } }\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/admin/ban-user/67caae3d0c841e0b4d475617",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"admin",
+								"ban-user",
+								"67caae3d0c841e0b4d475617"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ban/unban company",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"query\": \"query { allUsersAndCompanies { users { _id firstName lastName email role bannedAt } companies { _id companyName industry companyEmail bannedAt approvedByAdmin } } }\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/admin/ban-company/67c839381f6c815a6395ac34",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"admin",
+								"ban-company",
+								"67c839381f6c815a6395ac34"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "approve company",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"query\": \"query { allUsersAndCompanies { users { _id firstName lastName email role bannedAt } companies { _id companyName industry companyEmail bannedAt approvedByAdmin } } }\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/admin/approve-company/67c839381f6c815a6395ac34",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"admin",
+								"approve-company",
+								"67c839381f6c815a6395ac34"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "chat",
+			"item": [
+				{
+					"name": "get chat history",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/chat/history/67c54bbff549f8b100f28697",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"chat",
+								"history",
+								"67c54bbff549f8b100f28697"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "access_token",
+			"value": "",
+			"type": "default"
+		}
+	]
+}
